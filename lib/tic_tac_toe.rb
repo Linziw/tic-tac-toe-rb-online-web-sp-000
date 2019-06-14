@@ -44,7 +44,7 @@ def turn(board)
   input = gets.strip
   index = input_to_index(input)
 if valid_move?(board, index)
-  move(board, index, char = "X")
+  move(board, index, char = current_player(board))
   display_board(board)
 else
   turn(board)
@@ -87,5 +87,17 @@ def winner(board)
     return nil
   else
     board[won?(board)[0]]
+end
+end
+
+def play(board)
+  until over?(board)
+ turn(board)
+end
+ if won?(board)
+ puts "Congratulations #{current_player(board)}!"
+else if draw?(board)
+  puts "Cat's Game!"
+end
 end
 end
